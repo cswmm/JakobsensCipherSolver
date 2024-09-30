@@ -1,5 +1,4 @@
 from collections import Counter
-import re
 import numpy as np
 from const import E, LETTERS_BY_FREQUENCY
 
@@ -10,9 +9,13 @@ class Solver:
         self.key = self.initialKey(ciphertext)
         
     def subSolver(self):
+        # initialize variables
         testPlaintext = self.getPlaintext(self.key)
-        d = self.getD(testPlaintext)
+        d = self.getDigram(testPlaintext)
         v = self.evaluate(d)
+        
+        # potential new variables are denoted with 'prime'
+        # if letter swap returns a better score, k and d will be replaced with prime values
         kPrime = self.key
         dPrime = np.copy(d)
         a = b = 1
@@ -21,7 +24,7 @@ class Solver:
             letterA = LETTERS_BY_FREQUENCY[a - 1]
             letterB = LETTERS_BY_FREQUENCY[a + b - 1]
             
-            # swap letters a and b in kPrime
+            # swap letters a and b in new key
             x = kPrime.find(letterA)
             y = kPrime.find(letterB)
             kPrime = kPrime[:x] + letterB + kPrime[x+1:]
@@ -50,13 +53,16 @@ class Solver:
         return ''.join(key)
 
     def evaluate(self, d):
+        # gives an accuracy score for how close digram frequency matches target digram frequency
         sum = 0
         for i in range(26):
             for j in range(26):
                 sum += abs(d[i][j] - E[i][j])
         return sum
 
-    def getD(self, text):
+    def getDigram(self, text):
+
+        # returns a digram matrix of letter frequency
         d = np.zeros((26, 26))
         
         for i in range(0, len(text) - 1):
@@ -92,7 +98,6 @@ class Solver:
         textKey = ''
         for k in out:
             textKey += k
-        print(textKey)
 
         plaintext = ''
         for letter in self.ciphertext:

@@ -7,7 +7,6 @@ from solver.jakobsens import subSolver
 # print(solver.getPlaintext(solver.key))
 
 
-
 def main():
 
     input_file = 
