@@ -1,4 +1,5 @@
 from collections import Counter
+from string import ascii_uppercase
 import numpy as np
 from const import E, LETTERS_BY_FREQUENCY
 
@@ -49,7 +50,10 @@ class Solver:
     def initialKey(self, ciphertext):
         # create an initial decryption key based on the letter frequency
         count = Counter(ciphertext)
-        key = [letter[0] for letter in count.most_common()]
+        key = [letter[0] for letter in count.most_common() if letter[0] in ascii_uppercase]
+        for ch in ascii_uppercase:
+            if ch not in key:
+                key.append(ch)
         return ''.join(key)
 
     def evaluate(self, d):
@@ -101,5 +105,6 @@ class Solver:
 
         plaintext = ''
         for letter in self.ciphertext:
-            plaintext += translate[letter]
+            if letter in ascii_uppercase:
+                plaintext += translate[letter]
         return plaintext

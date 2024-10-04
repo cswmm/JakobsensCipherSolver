@@ -2,6 +2,7 @@ import numpy as np
 
 f = open("mobydick.txt", "r")
 source = [c.upper() for c in f.read() if c.isalpha()]
+f.close()
 size = len(source)
 E = np.zeros((26, 26))
 
