@@ -1,4 +1,9 @@
-# JakobsensCipherSolver
+# Automated Cipher Solver
+A program to automatically solve a simple substitution cipher using frequency analysis, build with Python using Mat Plot Lib and Numpy.
+
+# Screen Shots
+
+
 
 Sources:
 
