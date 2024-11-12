@@ -4,7 +4,8 @@ A program to automatically solve a simple substitution cipher using frequency an
 # Testing Results
 ![alt text](https://github.com/cswmm/JakobsensCipherSolver/blob/main/keyAcc.png?raw=true)
 ![alt text](https://github.com/cswmm/JakobsensCipherSolver/blob/main/textAcc.png?raw=true)
-Above is the result of testing the accuracy of the solver with respect to the number of characters in the ciphertext.
+
+Above is the result of testing the accuracy of the solver with respect to the number of characters in the ciphertext. With the text size, the decrypted plaintext accuracy increases linearly. In the end, this implementation was able to consistently achieve above 90% text decryption accuracy with large enough inputs.
 
 # Installation and Setup
 Clone this repository. You will need Mat Plot Lib and Numpy installed.
@@ -19,7 +20,7 @@ I set out to build a tool to do my homework for me, essentially, but also a way 
 
 One of the main challenges I ran into was debugging. I implemented the algorithm all at once, which at that point had so many moving parts it was a lot to dig through to find what was going wrong.
 
-At the end of the day, this project used Python and libraries such as Mat Plot Lib and Numpy. In the next iteration I plan on applying more OOP design principles and testing incrementally to quicken the design process.
+At the end of the day, I was able to apply Python, a new language, and libraries such as Mat Plot Lib and Numpy. In the next iteration I plan on applying more OOP design principles and testing incrementally to quicken the design process.
 
 
 # Sources:
