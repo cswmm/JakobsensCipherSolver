@@ -1,7 +1,7 @@
 # Automated Cipher Solver
 A program to automatically solve a simple substitution cipher using frequency analysis, build with Python using Mat Plot Lib and Numpy.
 
-# Screen Shots
+# Testing Results
 ![alt text](https://github.com/cswmm/JakobsensCipherSolver/blob/main/keyAcc.png?raw=true)
 ![alt text](https://github.com/cswmm/JakobsensCipherSolver/blob/main/textAcc.png?raw=true)
 Above is the result of testing the accuracy of the solver with respect to the number of characters in the ciphertext.
