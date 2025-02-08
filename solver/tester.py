@@ -4,6 +4,17 @@ import random
 import numpy as np
 from jakobsens import Solver
 from const import LETTERS, LETTERS_BY_FREQUENCY
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+
+client = OpenAI(
+    api_key=API_KEY
+)
 
 # warning: computationally expensive
 # takes a long time to run!
@@ -19,12 +30,8 @@ class Tester:
         targetKey = ''.join(random.sample(LETTERS, 26))
 
         # create test plaintext
-        s = ''
-        while len(s) < size:
-            word = random.choice(this.source)
-            for ch in word:
-                if ch.isalpha():
-                    s += ch.upper()
+        s = this.getText(str(size))
+        print(len(s))
     
         # encrypt
         # create key dict
@@ -61,13 +68,24 @@ class Tester:
         keyAcc = (numCorrect / 26) * 100
 
         numCorrect = 0
-        print
         for i in range(len(c)):
             if deKey[c[i]] == s[i]:
                 numCorrect += 1
         textAcc = (numCorrect / len(s)) * 100
 
         return keyAcc, textAcc
+
+    def getText(this, size):
+        
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini",
+            store=True,
+            messages=[
+                {"role": "user", "content": "Without saying anything else, generate a random text excerpt with exactly" + size + " characters."}
+    ]  
+)
+        print(completion.choices[0].message.content)
+        return [x.upper() for x in completion.choices[0].message.content if x.upper() in LETTERS]
 
 
 # gather data
@@ -78,6 +96,7 @@ for i in range(100, 1100, 100):
     kR = []
     tR = []
     for x in range(10):
+        print("Testing size: " + str(i) + " iteration: " + str(x))
         result = tester.test(i)
         kR.append(result[0])
         tR.append(result[1])
